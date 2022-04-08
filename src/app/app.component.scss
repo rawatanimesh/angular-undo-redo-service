@@ -5,4 +5,51 @@
       text-align: center;
     }
   }
+  &-body {
+    padding: 1em;
+    &-input {
+      text-align: center;
+      margin-bottom: 1em;
+      &-form {
+        width: 20.75em;
+      }
+    }
+    &-buttons {
+      text-align: center;
+    }
+    &-stacks {
+      padding: 1em;
+      display: flex;
+      justify-content: space-evenly;
+      &-stackBox {
+        background-color: #f5f5f5;
+        &-label {
+          padding: 1em;
+          font-weight: bold;
+        }
+        &-stack {
+          display: flex;
+          flex-direction: column;
+          &-actionBox {
+            padding: 0.5em;
+            min-height: 1.2em;
+            &:nth-child(1) {
+              border-bottom: 0.063em solid;
+              border-left: 0.063em solid;
+              border-right: 0.063em solid;
+            }
+            &:last-child {
+              border-left: 0.063em solid;
+              border-right: 0.063em solid;
+            }
+            &:not(:first-child):not(:last-child) {
+              border-bottom: 0.063em solid;
+              border-left: 0.063em solid;
+              border-right: 0.063em solid;
+            }
+          }
+        }
+      }
+    }
+  }
 }

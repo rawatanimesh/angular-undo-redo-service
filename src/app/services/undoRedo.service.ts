@@ -1,7 +1,7 @@
-import { EventEmitter, Injectable, Output } from "@angular/core";
+import { EventEmitter, Injectable, Output } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UndoRedoService {
   dataUndoArray: Array<any> = [];
@@ -16,9 +16,9 @@ export class UndoRedoService {
   constructor() {}
 
   newAction(actionData): void {
-    console.log("*****NEW ACTION****", actionData);
-    // first we cross check if we are getting valid action data
-    if (actionData.event != "") {
+    console.log('*****NEW ACTION****', actionData);
+    // first we cross check if we are getting valid action data (add your custom check here)
+    if (actionData.event != '') {
       //if we push any new action then we empty redo array
       this.dataRedoArray = [];
       this.showRedo = false;
@@ -33,12 +33,12 @@ export class UndoRedoService {
       this.dataUndoArray.push(actionData);
       this.showUndo = true;
     } else {
-      console.log("Invalid action data.");
+      console.error('Invalid action data.');
     }
 
-    console.log("dataUndoArray");
+    console.log('dataUndoArray');
     console.log(this.dataUndoArray);
-    console.log("dataRedoArray");
+    console.log('dataRedoArray');
     console.log(this.dataRedoArray);
   }
 
@@ -53,12 +53,12 @@ export class UndoRedoService {
     this.showRedo = true;
     if (this.dataUndoArray.length != 0) {
       console.log(
-        "undo Item",
+        'undo Item',
         this.dataUndoArray[this.dataUndoArray.length - 1]
       );
       //emit undo event details
       this.dataEmit.emit({
-        type: "undo",
+        type: 'undo',
         data: this.dataUndoArray[this.dataUndoArray.length - 1],
       });
       //we push most recent action from undo to redo list
@@ -68,21 +68,21 @@ export class UndoRedoService {
       }
     }
 
-    console.log("dataUndoArray");
+    console.log('dataUndoArray');
     console.log(this.dataUndoArray);
-    console.log("dataRedoArray");
+    console.log('dataRedoArray');
     console.log(this.dataRedoArray);
   }
 
   redo(): void {
     if (this.dataRedoArray.length != 0) {
       console.log(
-        "redo Item",
+        'redo Item',
         this.dataRedoArray[this.dataRedoArray.length - 1]
       );
       //emit redo event details
       this.dataEmit.emit({
-        type: "redo",
+        type: 'redo',
         data: this.dataRedoArray[this.dataRedoArray.length - 1],
       });
       //we push most recent action from redo to undo list
@@ -98,9 +98,9 @@ export class UndoRedoService {
       this.showUndo = false;
     }
 
-    console.log("dataUndoArray");
+    console.log('dataUndoArray');
     console.log(this.dataUndoArray);
-    console.log("dataRedoArray");
+    console.log('dataRedoArray');
     console.log(this.dataRedoArray);
   }
 }

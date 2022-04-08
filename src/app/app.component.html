@@ -10,16 +10,75 @@
 
   <!-- body  -->
   <div class="app-container-body">
-    <button mat-raised-button color="primary">Add</button>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Action Input</mat-label>
-      <input
-        matInput
-        placeholder="Enter value and add"
-        [(ngModel)]="actionInputValue"
-      />
-    </mat-form-field>
+    <div class="app-container-body-input">
+      <mat-form-field class="app-container-body-input-form" appearance="fill">
+        <mat-label>Action Input</mat-label>
+        <input
+          matInput
+          placeholder="Enter value and press enter"
+          [(ngModel)]="actionInputValue"
+          (ngModelChange)="addAction()"
+        />
+        <mat-hint align="start">Enter value and press enter </mat-hint>
+      </mat-form-field>
+    </div>
 
-    <button mat-raised-button color="warn">Clear</button>
+    <div class="app-container-body-buttons">
+      <button
+        mat-stroked-button
+        color="primary"
+        [disabled]="!undoRedoService.showUndo"
+        (click)="undoRedoService.undo()"
+      >
+        Undo
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        [disabled]="!undoRedoService.showRedo"
+        (click)="undoRedoService.redo()"
+      >
+        Redo
+      </button>
+
+      <div class="app-container-body-stacks">
+        <div class="app-container-body-stacks-stackBox">
+          <div class="app-container-body-stacks-stackBox-label">Undo Stack</div>
+          <div class="app-container-body-stacks-stackBox-stack">
+            <ng-container
+              *ngFor="let undoItem of undoRedoService.dataUndoArray"
+            >
+              <div class="app-container-body-stacks-stackBox-stack-actionBox">
+                {{ undoItem }}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="app-container-body-stacks-stackBox">
+          <div class="app-container-body-stacks-stackBox-label">Redo Stack</div>
+          <div class="app-container-body-stacks-stackBox-stack">
+            <ng-container
+              *ngFor="let redoItem of undoRedoService.dataRedoArray"
+            >
+              <div class="app-container-body-stacks-stackBox-stack-actionBox">
+                {{ redoItem }}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="
+            undoRedoService.clearAll(); showSnackBar('Undo/Redo stacks cleared')
+          "
+        >
+          Clear Stacks
+        </button>
+      </div>
+    </div>
   </div>
 </div>
