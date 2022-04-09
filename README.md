@@ -4,7 +4,7 @@ Reusable undo-redo angular service.
 
 ## Demo
 
-Checkout the demo - https://split-lap-stopwatch.stackblitz.io/
+Checkout the demo - https://angular-undo-redo.web.app/
 
 ![undo:redo](https://user-images.githubusercontent.com/25823744/162568199-2b561f52-2b4f-4803-8727-b239e80c19c8.gif)
 
