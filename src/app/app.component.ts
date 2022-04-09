@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
     public undoRedoService: UndoRedoService,
     private snackBar: MatSnackBar
   ) {}
-  actionInputValue: string = 'action 1';
+  actionInputValue: string = 'Sample Value';
+  prevValue;
 
   ngOnInit(): void {
     this.undoRedoService.dataEmit.subscribe((event) => {
@@ -21,19 +22,22 @@ export class AppComponent implements OnInit {
   }
 
   addAction() {
-    console.log(this.actionInputValue);
-    this.undoRedoService.newAction(this.actionInputValue);
+    console.log(this.prevValue, this.actionInputValue);
+    this.undoRedoService.newAction({
+      oldValue: this.prevValue,
+      newValue: this.actionInputValue,
+    });
   }
 
   handleEvent(event) {
     console.log(event);
     switch (event.type) {
       case 'undo': {
-        this.actionInputValue = event.data;
+        this.actionInputValue = event.data.oldValue;
         break;
       }
       case 'redo': {
-        this.actionInputValue = event.data;
+        this.actionInputValue = event.data.newValue;
         break;
       }
     }

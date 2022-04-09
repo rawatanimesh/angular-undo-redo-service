@@ -7,6 +7,10 @@
   }
   &-body {
     padding: 1em;
+    &-github {
+      display: flex;
+      justify-content: end;
+    }
     &-input {
       text-align: center;
       margin-bottom: 1em;
@@ -23,7 +27,11 @@
       justify-content: space-evenly;
       &-stackBox {
         background-color: #f5f5f5;
+        border: 0.063em solid #9c9c9c;
+        min-width: 16em;
         &-label {
+          background-color: #3f51b5;
+          color: #fff;
           padding: 1em;
           font-weight: bold;
         }
@@ -34,19 +42,27 @@
             padding: 0.5em;
             min-height: 1.2em;
             &:nth-child(1) {
-              border-bottom: 0.063em solid;
-              border-left: 0.063em solid;
-              border-right: 0.063em solid;
+              border-bottom: 0.063em solid #9c9c9c;
+              // border-left: 0.063em solid #9c9c9c;
+              // border-right: 0.063em solid #9c9c9c;
             }
             &:last-child {
-              border-left: 0.063em solid;
-              border-right: 0.063em solid;
+              // border-left: 0.063em solid #9c9c9c;
+              // border-right: 0.063em solid #9c9c9c;
             }
             &:not(:first-child):not(:last-child) {
-              border-bottom: 0.063em solid;
-              border-left: 0.063em solid;
-              border-right: 0.063em solid;
+              border-bottom: 0.063em solid #9c9c9c;
+              // border-left: 0.063em solid #9c9c9c;
+              // border-right: 0.063em solid #9c9c9c;
             }
+          }
+          &-empty {
+            color: #f44335;
+            min-height: 12em;
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }

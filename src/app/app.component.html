@@ -10,6 +10,15 @@
 
   <!-- body  -->
   <div class="app-container-body">
+    <div class="app-container-body-github">
+      <button
+        mat-button
+        onClick="window.open('https://github.com/rawatanimesh/angular-undo-redo-service')"
+      >
+        View on Github
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </div>
     <div class="app-container-body-input">
       <mat-form-field class="app-container-body-input-form" appearance="fill">
         <mat-label>Action Input</mat-label>
@@ -17,9 +26,10 @@
           matInput
           placeholder="Enter value and press enter"
           [(ngModel)]="actionInputValue"
-          (ngModelChange)="addAction()"
+          (keydown)="prevValue = actionInputValue"
+          (keyup)="addAction()"
         />
-        <mat-hint align="start">Enter value and press enter </mat-hint>
+        <mat-hint align="start">Change value of input to see action </mat-hint>
       </mat-form-field>
     </div>
 
@@ -45,11 +55,23 @@
         <div class="app-container-body-stacks-stackBox">
           <div class="app-container-body-stacks-stackBox-label">Undo Stack</div>
           <div class="app-container-body-stacks-stackBox-stack">
-            <ng-container
-              *ngFor="let undoItem of undoRedoService.dataUndoArray"
-            >
-              <div class="app-container-body-stacks-stackBox-stack-actionBox">
-                {{ undoItem }}
+            <ng-container *ngIf="undoRedoService.dataUndoArray.length">
+              <ng-container
+                *ngFor="
+                  let undoItem of undoRedoService.dataUndoArray
+                    .slice()
+                    .reverse()
+                "
+              >
+                <div class="app-container-body-stacks-stackBox-stack-actionBox">
+                  {{ undoItem.newValue }} ==> <b>{{ undoItem.oldValue }}</b>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="!undoRedoService.dataUndoArray.length">
+              <div class="app-container-body-stacks-stackBox-stack-empty">
+                Stack Empty
               </div>
             </ng-container>
           </div>
@@ -57,11 +79,22 @@
         <div class="app-container-body-stacks-stackBox">
           <div class="app-container-body-stacks-stackBox-label">Redo Stack</div>
           <div class="app-container-body-stacks-stackBox-stack">
-            <ng-container
-              *ngFor="let redoItem of undoRedoService.dataRedoArray"
-            >
-              <div class="app-container-body-stacks-stackBox-stack-actionBox">
-                {{ redoItem }}
+            <ng-container *ngIf="undoRedoService.dataRedoArray.length">
+              <ng-container
+                *ngFor="
+                  let redoItem of undoRedoService.dataRedoArray
+                    .slice()
+                    .reverse()
+                "
+              >
+                <div class="app-container-body-stacks-stackBox-stack-actionBox">
+                  {{ redoItem.oldValue }} ==> <b>{{ redoItem.newValue }}</b>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!undoRedoService.dataRedoArray.length">
+              <div class="app-container-body-stacks-stackBox-stack-empty">
+                Stack Empty
               </div>
             </ng-container>
           </div>
